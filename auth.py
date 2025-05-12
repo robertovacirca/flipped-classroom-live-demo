@@ -429,10 +429,11 @@ if authentication_status:
                     with st.expander("Sources"):
                         for i, node in enumerate(message["sources"]):
                             filename = node.metadata.get('filename', 'N/A')
+                            page_label = node.metadata.get('page_label', 'N/A')
                             score = node.score if hasattr(node, 'score') and node.score is not None else 'N/A'
                             score_text = f"{score:.2f}" if isinstance(score, float) else str(score)
                             text_snippet = node.text[:300].replace('\n', ' ') + "..."
-                            st.markdown(f"**Source {i+1}:** `{filename}` (Score: {score_text})")
+                            st.markdown(f"**Source {i+1}:** `{filename}` (Score: {score_text} Page: {page_label})")
                             st.caption(text_snippet)
     else:
         if not selected_index_name and authentication_status: # Only show if logged in
@@ -474,12 +475,8 @@ if authentication_status:
                             "content": full_response,
                             "sources": source_nodes
                         })
-                        # No st.rerun() here, message will appear on next natural rerun or input.
-                        # If immediate update is desired for sources, a rerun can be added,
-                        # but it might feel slightly disruptive if the user is typing.
-                        # For now, sources will appear when the next message is sent or page reloads.
-                        # To show sources immediately, uncomment:
-                        # st.rerun()
+                        # Show sources to user
+                        st.rerun()
 
                 except Exception as e:
                     st.error(f"An error occurred during chat: {e}")
