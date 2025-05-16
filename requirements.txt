@@ -6,3 +6,4 @@ llama-index-embeddings-openai
 openai
 pypdf          
 python-dotenv 
+docx2txt
