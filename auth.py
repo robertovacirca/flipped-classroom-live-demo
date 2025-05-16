@@ -402,10 +402,9 @@ if authentication_status:
                 index = load_index(selected_index_name, Settings.llm, Settings.embed_model)
                 if index:
                     st.session_state.chat_engine = get_chat_engine(index) # Uses current global Settings.llm
+                    if st.session_state.current_engine_index != selected_index_name:
+                        st.session_state.messages = []
                     st.session_state.current_engine_index = selected_index_name
-                    # If the index changed, clear previous messages
-                    if st.session_state.current_engine_index != selected_index_name and st.session_state.current_engine_index is not None:
-                         st.session_state.messages = []
                     logging.info(f"Chat engine ready for index: {selected_index_name} using {llm_display_name}")
                 else:
                     st.session_state.chat_engine = None # Explicitly set to None on failure
