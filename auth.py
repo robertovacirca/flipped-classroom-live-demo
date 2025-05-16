@@ -20,7 +20,7 @@ from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
 
 # --- Page Config (MUST BE THE FIRST STREAMLIT COMMAND) ---
-st.set_page_config(page_title="Financial Report Chatbot", page_icon="💰", layout="wide")
+st.set_page_config(page_title="RAG Chatbot Demo", page_icon="💰", layout="wide")
 
 # --- Configuration Constants ---
 STORAGE_DIR = "./storage"
@@ -30,7 +30,7 @@ EMBEDDING_MODEL_NAME = "text-embedding-3-small" # Default Embedding Model
 TEMPERATURE = 0.3
 TOP_K_RETRIEVAL = 5
 SYSTEM_PROMPT = """
-You are an expert financial analyst AI assistant.
+You are an expert document analyst AI assistant.
 You are interacting with a user who has uploaded one or more financial documents.
 Carefully analyze the user's questions and the relevant context from the documents.
 Provide clear, concise, and accurate answers based *only* on the information present in the provided documents.
@@ -252,7 +252,7 @@ if authentication_status:
         st.subheader("Create New Index")
         index_name_input = st.text_input("Enter a name for the new index:", key="index_name_input")
         uploaded_files = st.file_uploader(
-            "Upload financial documents (PDF, DOCX, TXT)",
+            "Upload you documents (PDF, DOCX, TXT)",
             accept_multiple_files=True,
             type=['pdf', 'docx', 'txt']
         )
@@ -329,8 +329,8 @@ if authentication_status:
             )
 
     # --- Main App Area (Title, Chat, etc.) ---
-    st.title("💬 Financial Report Chatbot")
-    st.caption(f"Chat with your financial documents using LlamaIndex and Streamlit.")
+    st.title("💬 RAG Powered Chatbot")
+    st.caption(f"Chat with your documents using LlamaIndex and Streamlit.")
 
     # --- API Key and Global Settings Configuration ---
     openai_api_key = st.secrets.get("OPENAI_API_KEY")
