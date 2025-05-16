@@ -409,6 +409,7 @@ if authentication_status:
                 else:
                     st.session_state.chat_engine = None # Explicitly set to None on failure
                     st.session_state.current_engine_index = None
+                    st.session_state.messages = []
                     st.warning(f"Could not load the selected index '{selected_index_name}'. Please try another one or check logs.")
     elif st.session_state.chat_engine is not None:
         # If no index is selected, or LLM/Embed model is not configured, clear any existing engine
